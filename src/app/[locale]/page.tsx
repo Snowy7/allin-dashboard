@@ -1,5 +1,7 @@
 import Link from 'next/link'
+import { Metadata } from 'next'
 import { useTranslations } from 'next-intl'
+import { getTranslations } from 'next-intl/server'
 import {
   ArrowRight,
   ArrowUpRight,
@@ -29,6 +31,37 @@ const FEATURE_ICONS = {
   chat: MessageSquare,
   payments: ShieldCheck,
 } as const
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'Metadata' })
+
+  return {
+    title: t('title'),
+    description: t('description'),
+    openGraph: {
+      title: t('title'),
+      description: t('description'),
+      locale: locale === 'ar' ? 'ar_QA' : 'en_US',
+      url: `https://www.happycakesweet.com/${locale}`,
+      siteName: 'Happy Sweet Cake',
+      images: [
+        {
+          url: 'https://www.happycakesweet.com/og-image.jpg', // Placeholder, user should add this
+          width: 1200,
+          height: 630,
+          alt: t('title'),
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: t('title'),
+      description: t('description'),
+      images: ['https://www.happycakesweet.com/og-image.jpg'],
+    },
+  }
+}
 
 export default function HomePage({ params }: PageProps) {
   const t = useTranslations()
@@ -82,8 +115,31 @@ export default function HomePage({ params }: PageProps) {
 
   const appFeatures = ['catalog', 'tracking', 'chat', 'payments'] as const
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Happy Sweet Cake',
+    url: 'https://www.happycakesweet.com',
+    logo: 'https://www.happycakesweet.com/icon.png',
+    description: t('Metadata.description'),
+    sameAs: [
+      'https://www.instagram.com/happysweetcake',
+    ],
+    contactPoint: {
+      '@type': 'ContactPoint',
+      telephone: '+974 5555 1234',
+      contactType: 'customer service',
+      areaServed: 'QA',
+      availableLanguage: ['en', 'ar']
+    }
+  }
+
   return (
     <div className="min-h-screen bg-background">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Navbar />
 
       <main>
