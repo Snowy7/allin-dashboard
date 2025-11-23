@@ -69,100 +69,116 @@ export async function getDashboardStats(): Promise<DashboardStats> {
     const firstDayOfLastMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1);
     const lastDayOfLastMonth = new Date(now.getFullYear(), now.getMonth(), 0);
 
-    // Total users
-    const { count: totalUsers } = await supabaseAdmin
-      .from('profiles')
-      .select('*', { count: 'exact', head: true });
+    const [
+      { count: totalUsers },
+      { count: totalProviders },
+      { count: totalBookings },
+      { data: revenueData },
+      { count: pendingVerifications },
+      { count: activeBookings },
+      { count: usersThisMonth },
+      { count: usersLastMonth },
+      { count: providersThisMonth },
+      { count: providersLastMonth },
+      { count: bookingsThisMonth },
+      { count: bookingsLastMonth },
+      { data: revenueThisMonth },
+      { data: revenueLastMonth }
+    ] = await Promise.all([
+      // Total users
+      supabaseAdmin
+        .from('profiles')
+        .select('*', { count: 'exact', head: true }),
 
-    // Total providers (approved)
-    const { count: totalProviders } = await supabaseAdmin
-      .from('provider_verifications')
-      .select('*', { count: 'exact', head: true })
-      .eq('verification_status', 'approved');
+      // Total providers (approved)
+      supabaseAdmin
+        .from('provider_verifications')
+        .select('*', { count: 'exact', head: true })
+        .eq('verification_status', 'approved'),
 
-    // Total bookings
-    const { count: totalBookings } = await supabaseAdmin
-      .from('bookings')
-      .select('*', { count: 'exact', head: true });
+      // Total bookings
+      supabaseAdmin
+        .from('bookings')
+        .select('*', { count: 'exact', head: true }),
 
-    // Total revenue (completed bookings)
-    const { data: revenueData } = await supabaseAdmin
-      .from('bookings')
-      .select('price')
-      .eq('status', 'completed');
+      // Total revenue (completed bookings)
+      supabaseAdmin
+        .from('bookings')
+        .select('price')
+        .eq('status', 'completed'),
+
+      // Pending verifications
+      supabaseAdmin
+        .from('provider_verifications')
+        .select('*', { count: 'exact', head: true })
+        .eq('verification_status', 'pending'),
+
+      // Active bookings
+      supabaseAdmin
+        .from('bookings')
+        .select('*', { count: 'exact', head: true })
+        .in('status', ['pending', 'accepted', 'in_progress']),
+
+      // Growth calculations - Users
+      supabaseAdmin
+        .from('profiles')
+        .select('*', { count: 'exact', head: true })
+        .gte('created_at', firstDayOfMonth.toISOString()),
+
+      supabaseAdmin
+        .from('profiles')
+        .select('*', { count: 'exact', head: true })
+        .gte('created_at', firstDayOfLastMonth.toISOString())
+        .lte('created_at', lastDayOfLastMonth.toISOString()),
+
+      // Growth calculations - Providers
+      supabaseAdmin
+        .from('provider_verifications')
+        .select('*', { count: 'exact', head: true })
+        .eq('verification_status', 'approved')
+        .gte('reviewed_at', firstDayOfMonth.toISOString()),
+
+      supabaseAdmin
+        .from('provider_verifications')
+        .select('*', { count: 'exact', head: true })
+        .eq('verification_status', 'approved')
+        .gte('reviewed_at', firstDayOfLastMonth.toISOString())
+        .lte('reviewed_at', lastDayOfLastMonth.toISOString()),
+
+      // Growth calculations - Bookings
+      supabaseAdmin
+        .from('bookings')
+        .select('*', { count: 'exact', head: true })
+        .gte('created_at', firstDayOfMonth.toISOString()),
+
+      supabaseAdmin
+        .from('bookings')
+        .select('*', { count: 'exact', head: true })
+        .gte('created_at', firstDayOfLastMonth.toISOString())
+        .lte('created_at', lastDayOfLastMonth.toISOString()),
+
+      // Growth calculations - Revenue
+      supabaseAdmin
+        .from('bookings')
+        .select('price')
+        .eq('status', 'completed')
+        .gte('created_at', firstDayOfMonth.toISOString()),
+
+      supabaseAdmin
+        .from('bookings')
+        .select('price')
+        .eq('status', 'completed')
+        .gte('created_at', firstDayOfLastMonth.toISOString())
+        .lte('created_at', lastDayOfLastMonth.toISOString())
+    ]);
 
     const totalRevenue = revenueData?.reduce((sum, booking) => sum + (booking.price || 0), 0) || 0;
 
-    // Pending verifications
-    const { count: pendingVerifications } = await supabaseAdmin
-      .from('provider_verifications')
-      .select('*', { count: 'exact', head: true })
-      .eq('verification_status', 'pending');
-
-    // Active bookings
-    const { count: activeBookings } = await supabaseAdmin
-      .from('bookings')
-      .select('*', { count: 'exact', head: true })
-      .in('status', ['pending', 'accepted', 'in_progress']);
-
-    // Growth calculations
-    // Users this month vs last month
-    const { count: usersThisMonth } = await supabaseAdmin
-      .from('profiles')
-      .select('*', { count: 'exact', head: true })
-      .gte('created_at', firstDayOfMonth.toISOString());
-
-    const { count: usersLastMonth } = await supabaseAdmin
-      .from('profiles')
-      .select('*', { count: 'exact', head: true })
-      .gte('created_at', firstDayOfLastMonth.toISOString())
-      .lte('created_at', lastDayOfLastMonth.toISOString());
-
     const userGrowth = usersLastMonth ? ((usersThisMonth || 0) - usersLastMonth) / usersLastMonth * 100 : 0;
-
-    // Providers this month vs last month
-    const { count: providersThisMonth } = await supabaseAdmin
-      .from('provider_verifications')
-      .select('*', { count: 'exact', head: true })
-      .eq('verification_status', 'approved')
-      .gte('reviewed_at', firstDayOfMonth.toISOString());
-
-    const { count: providersLastMonth } = await supabaseAdmin
-      .from('provider_verifications')
-      .select('*', { count: 'exact', head: true })
-      .eq('verification_status', 'approved')
-      .gte('reviewed_at', firstDayOfLastMonth.toISOString())
-      .lte('reviewed_at', lastDayOfLastMonth.toISOString());
 
     const providerGrowth = providersLastMonth ? ((providersThisMonth || 0) - providersLastMonth) / providersLastMonth * 100 : 0;
 
-    // Bookings this month vs last month
-    const { count: bookingsThisMonth } = await supabaseAdmin
-      .from('bookings')
-      .select('*', { count: 'exact', head: true })
-      .gte('created_at', firstDayOfMonth.toISOString());
-
-    const { count: bookingsLastMonth } = await supabaseAdmin
-      .from('bookings')
-      .select('*', { count: 'exact', head: true })
-      .gte('created_at', firstDayOfLastMonth.toISOString())
-      .lte('created_at', lastDayOfLastMonth.toISOString());
-
     const bookingGrowth = bookingsLastMonth ? ((bookingsThisMonth || 0) - bookingsLastMonth) / bookingsLastMonth * 100 : 0;
-
-    // Revenue growth
-    const { data: revenueThisMonth } = await supabaseAdmin
-      .from('bookings')
-      .select('price')
-      .eq('status', 'completed')
-      .gte('created_at', firstDayOfMonth.toISOString());
-
-    const { data: revenueLastMonth } = await supabaseAdmin
-      .from('bookings')
-      .select('price')
-      .eq('status', 'completed')
-      .gte('created_at', firstDayOfLastMonth.toISOString())
-      .lte('created_at', lastDayOfLastMonth.toISOString());
 
     const thisMonthRevenue = revenueThisMonth?.reduce((sum, booking) => sum + (booking.price || 0), 0) || 0;
     const lastMonthRevenue = revenueLastMonth?.reduce((sum, booking) => sum + (booking.price || 0), 0) || 0;

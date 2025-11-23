@@ -1,0 +1,211 @@
+{
+  "Metadata": {
+    "title": "Happy Sweet Cake",
+    "description": "Curated sweets, fine florals, and bespoke celebrations across Qatar."
+  },
+  "Navbar": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "contact": "Contact",
+    "cta": "Book consultation"
+  },
+  "Landing": {
+    "tagline": "Curated sweets, florals & celebrations for Qatar",
+    "title": "Celebrate beautifully with Happy Sweet Cake",
+    "subtitle": "A Qatari platform connecting clients with couture dessert studios, floral artists, and premium event planners. Shop bilingual collections, request bespoke coordination, and enjoy reliable delivery of the latest designs anywhere in Qatar.",
+    "ctaPrimary": "Explore collections",
+    "ctaSecondary": "Plan a bespoke event",
+    "stats": {
+      "vendors": "Curated partners",
+      "deliveries": "Same-day drops",
+      "events": "Signature events"
+    },
+    "immersiveTitle": "Everything you need for unforgettable occasions",
+    "immersiveSubtitle": "Order artisanal desserts, refined florals, décor, favors, and concierge services in one place without juggling multiple chats or apps.",
+    "immersiveCards": {
+      "desserts": {
+        "title": "Artisanal desserts",
+        "description": "Seasonal menus, tiered cakes, petits fours, and corporate gifting boxes."
+      },
+      "flowers": {
+        "title": "Floral artistry",
+        "description": "Botanical storytelling by Doha’s top florists with on-site styling."
+      },
+      "events": {
+        "title": "Events & décor",
+        "description": "Concepts, rentals, favors, and full coordination for any scale."
+      }
+    },
+    "highlights": {
+      "quality": {
+        "title": "Certified quality",
+        "description": "Every partner is vetted for craftsmanship, hygiene, and punctual delivery."
+      },
+      "logistics": {
+        "title": "Responsive logistics",
+        "description": "Live order status, temperature-safe transport, and venue-ready setup."
+      },
+      "concierge": {
+        "title": "Bespoke concierge",
+        "description": "Dedicated stylists translate your mood board into cohesive experiences."
+      }
+    },
+    "collectionsTitle": "Curated inspiration",
+    "collectionsSubtitle": "Tap into ready-to-order looks or use them as a starting point for a custom brief.",
+    "collections": {
+      "majlis": {
+        "title": "Modern majlis",
+        "description": "Structured blooms, geometric dessert displays, and warm metallics."
+      },
+      "garden": {
+        "title": "Garden soirée",
+        "description": "Hand-painted cakes, lush greenery, and airy al fresco styling."
+      },
+      "corporate": {
+        "title": "Corporate gifting",
+        "description": "Branded confections with premium packaging and concierge delivery."
+      }
+    }
+  },
+  "Services": {
+    "title": "Signature services",
+    "description": "Choose curated bundles or brief us for something entirely bespoke.",
+    "cards": {
+      "sweets": {
+        "title": "Couture desserts",
+        "description": "Showpiece cakes, dessert tables, and favors tailored to your theme.",
+        "bullets": {
+          "1": "Tiered celebration cakes",
+          "2": "Petits fours & Arabic sweets",
+          "3": "Live dessert stations",
+          "4": "Corporate & VIP gifting"
+        }
+      },
+      "flowers": {
+        "title": "Floral design",
+        "description": "Botanical compositions for intimate dinners or grand installations.",
+        "bullets": {
+          "1": "Signature bouquets & boxes",
+          "2": "Tablescapes and backdrops",
+          "3": "Floral favors",
+          "4": "Venue styling support"
+        }
+      },
+      "events": {
+        "title": "Event coordination",
+        "description": "Full-planning or day-of support with trusted décor and production partners.",
+        "bullets": {
+          "1": "Concept & mood boards",
+          "2": "Vendor / venue management",
+          "3": "On-site styling teams",
+          "4": "Post-event wrap-up"
+        }
+      },
+      "commerce": {
+        "title": "E-commerce concierge",
+        "description": "Fast bilingual checkout with tracked deliveries and secure payments.",
+        "bullets": {
+          "1": "Instant availability checks",
+          "2": "Flexible delivery windows",
+          "3": "Order tracking dashboard",
+          "4": "Preferred customer perks"
+        }
+      }
+    }
+  },
+  "About": {
+    "title": "Rooted in Qatar, inspired by celebrations",
+    "description": "Happy Sweet Cake unites the country’s most-loved dessert artisans, floral studios, and event houses into one trusted marketplace. We bridge discerning clients with premium suppliers through a seamless bilingual e-commerce experience and reliable logistics.",
+    "pillars": {
+      "craft": {
+        "title": "Craftsmanship",
+        "description": "We curate ateliers known for exceptional flavor, technique, and storytelling."
+      },
+      "innovation": {
+        "title": "Innovation",
+        "description": "Digital catalogues, live inventory, and guided styling keep planning effortless."
+      },
+      "community": {
+        "title": "Community",
+        "description": "Local founders, couriers, and creatives collaborate to elevate every moment."
+      }
+    },
+    "values": {
+      "quality": "Obsessive attention to detail and premium sourcing.",
+      "trust": "Verified partners, transparent pricing, and secure transactions.",
+      "care": "Responsive Arabic & English support from people who live celebrations."
+    }
+  },
+  "App": {
+    "badge": "All-in-one concierge app • Coming soon",
+    "title": "All In",
+    "description": "Browse bilingual catalogues, approve designs, chat with stylists, and track deliveries from a single secure experience.",
+    "comingSoon": "Launching soon on iOS & Android",
+    "primaryCta": "Join waitlist",
+    "secondaryCta": "Download product deck",
+    "learnMore": "Learn more",
+    "features": {
+      "catalog": {
+        "title": "Interactive catalogues",
+        "description": "Zoom into finishes, favorite looks, and build sharable mood boards."
+      },
+      "tracking": {
+        "title": "Real-time logistics",
+        "description": "Delivery timelines, driver tracking, and proof-of-delivery in-app."
+      },
+      "chat": {
+        "title": "Concierge chat",
+        "description": "Bilingual support with file sharing, approvals, and reminders."
+      },
+      "payments": {
+        "title": "Secure payments",
+        "description": "Escrow-style protection, Apple Pay, invoicing, and instant refunds."
+      }
+    }
+  },
+  "ContactPage": {
+    "title": "Let’s plan your next celebration",
+    "subtitle": "Share your brief and our concierge team will respond within one business day.",
+    "methods": {
+      "email": {
+        "label": "Email",
+        "value": "info@happycakesweet.com"
+      },
+      "phone": {
+        "label": "Phone",
+        "value": "+974 5555 1234"
+      },
+      "studio": {
+        "label": "Studio",
+        "value": "Doha, Qatar"
+      }
+    },
+    "form": {
+      "name": "Full name",
+      "email": "Email address",
+      "phone": "Phone number (optional)",
+      "message": "Tell us about your occasion",
+      "submit": "Send message"
+    },
+    "response": "By submitting you agree to our privacy policy.",
+    "hoursTitle": "Concierge availability",
+    "hours": {
+      "weekday": "Sunday – Thursday",
+      "weekdayHours": "9:00 AM – 8:00 PM",
+      "weekend": "Friday – Saturday",
+      "weekendHours": "10:00 AM – 4:00 PM"
+    }
+  },
+  "Cookie": {
+    "title": "We use cookies to enhance your experience.",
+    "description": "Accept cookies to enjoy tailored recommendations and faster checkout.",
+    "accept": "Accept",
+    "decline": "Decline",
+    "policy": "Cookie policy"
+  },
+  "Footer": {
+    "tagline": "Premium sweets, florals, and celebrations across Qatar.",
+    "rights": "© 2025 Happy Sweet Cake. All rights reserved."
+  }
+}

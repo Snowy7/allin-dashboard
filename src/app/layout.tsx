@@ -9,8 +9,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "AllIn Admin Dashboard",
-  description: "Manage your AllIn handyman service platform",
+  title: "Happy Sweet Cake",
+  description: "Your destination for sweets, flowers, and unforgettable events in Qatar",
 };
 
 export default function RootLayout({
@@ -23,8 +23,7 @@ export default function RootLayout({
       <body className={`${inter.variable} antialiased`}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="light"
           disableTransitionOnChange
         >
           {children}

@@ -1,7 +1,17 @@
 import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
 import { getDashboardStats, getRevenueByMonth, getBookingsByDay, getCategoryDistribution, getRecentActivity } from '@/lib/db';
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  // Security check
+  const isAuthenticated = request.cookies.get('isAuthenticated')?.value === 'true';
+  if (!isAuthenticated) {
+    return NextResponse.json(
+      { error: 'Unauthorized' },
+      { status: 401 }
+    );
+  }
+
   try {
     const [stats, revenue, bookings, categories, activity] = await Promise.all([
       getDashboardStats(),

@@ -1,4 +1,4 @@
-# Handyman Admin Dashboard
+# All In Admin Dashboard
 
 A modern, full-featured admin dashboard for managing a handyman service platform. Built with Next.js 15, TypeScript, Tailwind CSS, and Supabase.
 
@@ -72,8 +72,9 @@ dashboard/
 ## 🎨 Design System
 
 ### Colors
-- **Primary:** Orange (#f97316) - Matches mobile app branding
-- **Secondary:** Gray shades for UI elements
+- **Primary:** Orange (#FF6B35) - Matches mobile app branding
+- **Secondary:** Blue (#004E89)
+- **Accent:** Gold (#F7B801)
 - **Success:** Green for positive indicators
 - **Warning:** Yellow for alerts
 - **Destructive:** Red for errors
